@@ -1,0 +1,13 @@
+container:
+  image: cirrusci/flutter:latest
+
+style_task:
+  test_style_script:
+    - dartfmt --set-exit-if-changed lib
+
+test_task:
+  pub_cache:
+    folder: ~/.pub-cache
+  test_script:
+    - pub get
+    - pub run test_coverage
