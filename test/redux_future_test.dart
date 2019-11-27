@@ -58,8 +58,7 @@ void main() {
         expect(store.state, dispatchedAction);
       });
 
-      test('dispatches a FutureRejectedAction if the future returns an error',
-          () {
+      test('dispatches a FutureErrorAction if the future returns an error', () {
         final Exception exception = Exception("Error Message");
         final Future<String> future = Future<String>.error(exception);
         final FutureAction<Action, String> action =
@@ -95,7 +94,9 @@ void main() {
             completion(contains(exception.toString())));
       });
 
-      test('dispatchs initial action through Store.dispatch', () async {
+      test(
+          'Follows the FutureAction -> FuturePendingAction -> FutureSuccessAction logic',
+          () async {
         FutureAction<Action, String> action = FutureAction<Action, String>(
             future: Future<String>.value("Friend"));
 
@@ -107,6 +108,32 @@ void main() {
           (FutureSuccessAction<Action, String>()..payload = fulfilledAction)
               .toString(),
         ]);
+      });
+    });
+
+    group('isActionOfFutureType method tests', () {
+      test('Should give false for non future type actions', () {
+        bool answer = isActionOfFutureType(Action());
+        expect(answer, false);
+      });
+
+      test(
+          'Should give true for any action which is of defined Future Action Type',
+          () {
+        FutureAction<Action, String> futureAction =
+            FutureAction<Action, String>(
+                future: Future<String>.value("Friend"));
+        FuturePendingAction<Action> futurePendingAction =
+            FuturePendingAction<Action>();
+        FutureSuccessAction<Action, String> futureSuccessAction =
+            FutureSuccessAction<Action, String>();
+        FutureErrorAction<String> futureErrorAction =
+            FutureErrorAction<String>();
+
+        expect(isActionOfFutureType(futureAction), true);
+        expect(isActionOfFutureType(futurePendingAction), true);
+        expect(isActionOfFutureType(futureSuccessAction), true);
+        expect(isActionOfFutureType(futureErrorAction), true);
       });
     });
   });
