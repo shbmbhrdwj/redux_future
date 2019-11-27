@@ -6,8 +6,12 @@ style_task:
     - dartfmt --set-exit-if-changed lib
 
 test_task:
+  env:
+    CODECOV_TOKEN: ENCRYPTED[1f01d1491a4355b42e57b0a9ae467e0db04510125470fed3b0a1e68c2ed468d1d7ae83b763aa03b591d92ba0385ffc86]
   pub_cache:
     folder: ~/.pub-cache
   test_script:
     - pub get
     - pub run test_coverage
+  codecov_script:
+    - bash <(curl -s https://codecov.io/bash) -t $CODE_COV_TOKEN
