@@ -1,18 +1,18 @@
-container:
-  image: cirrusci/flutter:latest
+# container:
+#   image: cirrusci/flutter:latest
 
-style_task:
-  test_style_script:
-    - dartfmt --set-exit-if-changed lib
+# style_task:
+#   test_style_script:
+#     - dartfmt --set-exit-if-changed lib
 
-test_task:
-  env:
-    CODECOV_TOKEN: ENCRYPTED[1f01d1491a4355b42e57b0a9ae467e0db04510125470fed3b0a1e68c2ed468d1d7ae83b763aa03b591d92ba0385ffc86]
-  pub_cache:
-    folder: ~/.pub-cache
-  test_script:
-    - pub get
-    - pub run test_coverage
-  codecov_script:
-    - echo $CODECOV_TOKEN
-    - bash <(curl -s https://codecov.io/bash) -t "00154685-2cfa-41a9-babd-b8faa281c463"
+# test_task:
+#   env:
+#     CODECOV_TOKEN: ENCRYPTED[1f01d1491a4355b42e57b0a9ae467e0db04510125470fed3b0a1e68c2ed468d1d7ae83b763aa03b591d92ba0385ffc86]
+#   pub_cache:
+#     folder: ~/.pub-cache
+#   test_script:
+#     - pub get
+#     - pub run test_coverage
+#   codecov_script:
+#     - echo $CODECOV_TOKEN
+#     - bash <(curl -s https://codecov.io/bash) -t "00154685-2cfa-41a9-babd-b8faa281c463"
