@@ -15,4 +15,4 @@ test_task:
     - pub run test_coverage
   codecov_script:
     - echo $CODECOV_TOKEN
-    - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+    - bash <(curl -s https://codecov.io/bash) -t f95f59bf-3434-45e6-aada-b3db5d04d8d3
