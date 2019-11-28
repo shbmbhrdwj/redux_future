@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:redux/redux.dart';
+import 'package:test/test.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
-import 'package:test_api/test_api.dart';
 
 class Action {}
 
