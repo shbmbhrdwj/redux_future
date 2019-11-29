@@ -8,9 +8,9 @@ The `futureMiddleware` can be attached to the `Redux` store upon construction.
 
 Once attached, you can `store.dipatch` the `FutureAction`, and the `futureMiddleware` will intercept it.
 
-    * If the `Future` passed in `FutureAction` completes successfully, a `FutureSuccessAction` will be dipatched with the result of the `Future`.
-    * If the `Future` passed in `FutureAction` fails, a `FutureErrorAction` will be dispatched containing the error that was returned.
-    * When the `FutureAction` is dipatches, a `FuturePendingAction` is dispatched from the `futureMiddleware` for consumption by the `Reducer`.
+- If the `Future` passed in `FutureAction` completes successfully, a `FutureSuccessAction` will be dipatched with the result of the `Future`.
+- If the `Future` passed in `FutureAction` fails, a `FutureErrorAction` will be dispatched containing the error that was returned.
+- When the `FutureAction` is dipatches, a `FuturePendingAction` is dispatched from the `futureMiddleware` for consumption by the `Reducer`.
 
 # Usage:
 
@@ -25,7 +25,7 @@ main() {
             return 'Fetching';
         } else if (action is FutureSuccessAction<ExampleAction, String>) {
             return action.payload;
-        } else if (action is FuturePendingAction<ExampleAction>) {
+        } else if (action is FutureErrorAction<ExampleAction>) {
             return action.error.toString();
         }
 
