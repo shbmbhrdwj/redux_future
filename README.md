@@ -1,5 +1,6 @@
 # Redux Future Middleware (Dart/Flutter)
 
+![Pub](https://img.shields.io/pub/v/redux_future_middleware)
 [![Build Status](https://travis-ci.org/shbmbhrdwj/redux_future.svg?branch=master)](https://travis-ci.org/shbmbhrdwj/redux_future) [![codecov](https://codecov.io/gh/shbmbhrdwj/redux_future/branch/master/graph/badge.svg)](https://codecov.io/gh/shbmbhrdwj/redux_future)
 
 Redux middleware package for handling Dart Futures by creating a FutureAction.
