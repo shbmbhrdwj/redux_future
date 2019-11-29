@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
+## [v0.1.0]
 
-* TODO: Describe initial release.
+Initial Release
+
+[v0.1.0]: https://github.com/shbmbhrdwj/redux_future/tag/v0.1.0

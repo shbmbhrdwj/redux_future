@@ -1,10 +1,10 @@
 name: redux_future_middleware
-description: A new Flutter package project.
-version: 0.0.1
+description: A Redux Middleware to handle Dart Future as Actions
+version: 0.1.0
 author: Shubham Bhardwaj <shbmbhrdwj@gmail.com>
 homepage: https://github.com/shbmbhrdwj/redux_future
-repository: https://github.com/flrx/validator
-issue_tracker: https://github.com/flrx/validator/issues
+repository: https://github.com/shbmbhrdwj/redux_future
+issue_tracker: https://github.com/shbmbhrdwj/redux_future/issues/
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
