@@ -1,21 +1,13 @@
+import 'package:example/reducer.dart';
+import 'package:example/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
 
-class Increment {}
-
-int counterReducer(int state, dynamic action) {
-  if (action is FutureSuccessAction<Increment, int>) {
-    return state + 1;
-  }
-
-  return state;
-}
-
 void main() {
-  final store = Store<int>(counterReducer,
-      initialState: 0, middleware: [futureMiddleware]);
+  final store = Store<CounterState>(CounterReducer.reduce,
+      initialState: CounterState(), middleware: [futureMiddleware]);
 
   runApp(MyApp(
     store: store,
@@ -23,13 +15,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Store<int> store;
+  final Store<CounterState> store;
 
   MyApp({@required this.store});
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<int>(
+    return StoreProvider<CounterState>(
       store: store,
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -49,7 +41,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<int, CounterViewModel>(
+    return StoreConnector<CounterState, CounterViewModel>(
         converter: (store) => CounterViewModel.fromStore(store),
         builder: (context, viewModel) {
           return Scaffold(
@@ -85,9 +77,9 @@ class CounterViewModel {
 
   CounterViewModel({this.counterValue, this.callback});
 
-  factory CounterViewModel.fromStore(Store<int> store) {
+  factory CounterViewModel.fromStore(Store<CounterState> store) {
     return CounterViewModel(
-      counterValue: store.state,
+      counterValue: store.state.value,
       callback: () => store.dispatch(
         FutureAction<Increment, int>(
           future: Future.delayed(

@@ -2,6 +2,8 @@ library redux_future_middleware;
 
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
+export 'future_state.dart';
+export 'future_reducer.dart';
 
 /// A [Redux] action class primarily used for dispatching an
 /// action containing [Future].
