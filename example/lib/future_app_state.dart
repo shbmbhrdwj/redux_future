@@ -1,4 +1,4 @@
-import 'package:redux_future_middleware/future_state.dart';
+import 'package:redux_future_middleware/redux_future_middleware.dart';
 
 class FutureAppState implements FutureState {
   String error;
