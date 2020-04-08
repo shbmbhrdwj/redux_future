@@ -8,7 +8,10 @@ import 'package:redux_future_middleware/redux_future_middleware.dart';
 void main() {
   final store = Store<CounterState>(CounterReducer.reduce,
       initialState: CounterState(), middleware: [futureMiddleware]);
-
+  FutureReducer.defaultPendingReducer =
+      <S, A>(S prevState, FuturePendingAction<A> action) {
+    return prevState;
+  };
   runApp(MyApp(
     store: store,
   ));
@@ -89,4 +92,8 @@ class CounterViewModel {
       ),
     );
   }
+}
+
+S meraBachchaReducer<S, A>(S prevState, FuturePendingAction<A> action) {
+  return prevState;
 }

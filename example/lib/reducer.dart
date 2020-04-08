@@ -4,8 +4,8 @@ import 'package:redux_future_middleware/redux_future_middleware.dart';
 class Increment {}
 
 class CounterReducer {
-  static Function reduce =
-      FutureReducer<CounterState, Increment, int>(successReducer);
+  static Function reduce = FutureReducer<CounterState, Increment, int>(
+      successReducer: successReducer);
 
   static CounterState successReducer(CounterState state, action) {
     state.value++;
