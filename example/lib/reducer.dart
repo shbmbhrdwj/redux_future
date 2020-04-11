@@ -8,7 +8,10 @@ class CounterReducer {
       successReducer: successReducer);
 
   static CounterState successReducer(CounterState state, action) {
-    state.value++;
-    return state;
+    print(state.loadingState);
+    return state.rebuild((builder) => builder
+      ..value = state.value + 1
+      ..loadingState = 3
+      ..build());
   }
 }

@@ -32,8 +32,12 @@ class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
   }) {
     return FutureReducer._(
       successReducer: successReducer,
-      pendingReducer: pendingReducer ?? FutureReducerDefaults.pendingReducer,
-      failedReducer: failedReducer ?? FutureReducerDefaults.failedReducer,
+      pendingReducer: pendingReducer ??
+          (State state, FuturePendingAction<Action> action) =>
+              FutureReducerDefaults.pendingReducer(state, action),
+      failedReducer: failedReducer ??
+          (State state, FutureFailedAction<Action> action) =>
+              FutureReducerDefaults.failedReducer(state, action),
     );
   }
 

@@ -7,11 +7,8 @@ import 'package:redux_future_middleware/redux_future_middleware.dart';
 
 void main() {
   final store = Store<CounterState>(CounterReducer.reduce,
-      initialState: CounterState(), middleware: [futureMiddleware]);
-  FutureReducerDefaults.pendingReducer =
-      <S, A>(S prevState, FuturePendingAction<A> action) {
-    return prevState;
-  };
+      initialState: CounterState.initialState(),
+      middleware: [futureMiddleware]);
   runApp(MyApp(
     store: store,
   ));
