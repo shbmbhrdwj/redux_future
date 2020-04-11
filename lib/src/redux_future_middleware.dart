@@ -40,7 +40,7 @@ _dispatchFutureAction<State>(Store<State> store, FutureAction action) {
 /// is of any of the Future Actions created above.
 bool isActionOfFutureType<A, P>(dynamic action) {
   return action is FutureAction<A, P> ||
-      action is FutureSuccededAction<A, P> ||
+      action is FutureSucceededAction<A, P> ||
       action is FuturePendingAction<A> ||
       action is FutureFailedAction<A>;
 }

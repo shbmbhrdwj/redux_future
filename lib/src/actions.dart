@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 /// The [FutureAction] takes an identifying action and a payload type
 /// (defining the return type of [Future]), as generic arguments. These
 /// generic arguments are used in creating three actions, i.e.,
-/// [FuturePendingAction], [FutureSuccededAction] and [FutureFailedAction],
+/// [FuturePendingAction], [FutureSucceededAction] and [FutureFailedAction],
 /// which can be consumed by the [Reducer] defined by the user.
 class FutureAction<A, P> {
   FutureAction({@required this.future, this.extras});
@@ -32,18 +32,15 @@ class FutureAction<A, P> {
   FuturePendingAction<A> get pendingAction =>
       FuturePendingAction(extras: extras);
 
-  /// The getter for generated [FutureSuccededAction] used by
+  /// The getter for generated [FutureSucceededAction] used by
   /// the Middleware.
-  FutureSuccededAction<A, P> get successAction =>
-      FutureSuccededAction<A, P>(extras: extras);
+  FutureSucceededAction<A, P> get successAction =>
+      FutureSucceededAction<A, P>(extras: extras);
 
   /// The getter for generated [FutureFailedAction] used by
   /// the Middleware.
   FutureFailedAction<A> get failedAction =>
       FutureFailedAction<A>(extras: extras);
-
-  @Deprecated('Use failedAction instead')
-  FutureFailedAction<A> get errorAction => failedAction;
 }
 
 /// An action class which is created by the Middleware for
@@ -65,8 +62,8 @@ class FuturePendingAction<A> {
 /// signalling that the current state of [Future] is completed
 /// and is successful, this class contains the result of [Future]
 /// in [payload] property.
-class FutureSuccededAction<A, P> {
-  FutureSuccededAction({this.extras});
+class FutureSucceededAction<A, P> {
+  FutureSucceededAction({this.extras});
 
   /// A property containing the extras passed by [FutureAction].
   Map<String, dynamic> extras;
@@ -83,7 +80,7 @@ class FutureSuccededAction<A, P> {
 }
 
 @Deprecated("Use FutureSuccededAction instead")
-class FutureSuccessAction<A, P> extends FutureSuccededAction<A, P> {
+class FutureSuccessAction<A, P> extends FutureSucceededAction<A, P> {
   FutureSuccessAction({Map<String, dynamic> extras}) : super(extras: extras);
 
   @override

@@ -9,8 +9,8 @@ import 'package:redux_future_middleware/src/reducer_defaults.dart';
 ///
 ///
 class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
-  /// A reducer to handle [FutureSuccededAction].
-  final State Function(State, FutureSuccededAction<Action, Payload>)
+  /// A reducer to handle [FutureSucceededAction].
+  final State Function(State, FutureSucceededAction<Action, Payload>)
       successReducer;
 
   /// A reducer to handle [FutureFailedAction], when you need to use custom
@@ -25,7 +25,7 @@ class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
 
   factory FutureReducer({
     @required
-        State Function(State, FutureSuccededAction<Action, Payload>)
+        State Function(State, FutureSucceededAction<Action, Payload>)
             successReducer,
     State Function(State, FuturePendingAction<Action>) pendingReducer,
     State Function(State, FutureFailedAction<Action>) failedReducer,
@@ -48,7 +48,7 @@ class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
   });
 
   State call(State prevState, dynamic action) {
-    if (action is FutureSuccededAction<Action, Payload>) {
+    if (action is FutureSucceededAction<Action, Payload>) {
       return successReducer(prevState, action);
     }
     if (action is FuturePendingAction<Action>) {

@@ -19,7 +19,7 @@ void main() {
     String futureReducer(String state, dynamic action) {
       if (action is FuturePendingAction<Action>) {
         return action.toString();
-      } else if (action is FutureSuccededAction<Action, String>) {
+      } else if (action is FutureSucceededAction<Action, String>) {
         return action.payload;
       } else if (action is FutureFailedAction) {
         return action.error.toString();
@@ -105,7 +105,7 @@ void main() {
         expect(logs, <String>[
           action.toString(),
           FuturePendingAction<Action>().toString(),
-          (FutureSuccededAction<Action, String>()..payload = fulfilledAction)
+          (FutureSucceededAction<Action, String>()..payload = fulfilledAction)
               .toString(),
         ]);
       });
@@ -125,8 +125,8 @@ void main() {
                 future: Future<String>.value("Friend"));
         FuturePendingAction<Action> futurePendingAction =
             FuturePendingAction<Action>();
-        FutureSuccededAction<Action, String> futureSuccededAction =
-            FutureSuccededAction<Action, String>();
+        FutureSucceededAction<Action, String> futureSuccededAction =
+            FutureSucceededAction<Action, String>();
         FutureFailedAction<String> futureErrorAction =
             FutureFailedAction<String>();
 
