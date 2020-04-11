@@ -12,7 +12,7 @@ class FutureReducerDefaults {
   static State futurePendingReducer<State, Action>(
       State prevState, FuturePendingAction<Action> action) {
     if (prevState is FutureState) {
-      return prevState.rebuildForPending(action);
+      return prevState.updateOnPending(action) as State;
     }
     throw ArgumentError.notNull(
         "State is not FutureState and Custom PendingReducer is null");
@@ -28,7 +28,7 @@ class FutureReducerDefaults {
   static State futureFailedReducer<State, Action>(
       State prevState, FutureFailedAction<Action> action) {
     if (prevState is FutureState) {
-      return prevState.rebuildForError(action);
+      return prevState.updateOnFailed(action) as State;
     }
 
     throw ArgumentError.notNull(

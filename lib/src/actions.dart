@@ -39,8 +39,11 @@ class FutureAction<A, P> {
 
   /// The getter for generated [FutureFailedAction] used by
   /// the Middleware.
-  FutureFailedAction<A> get errorAction =>
+  FutureFailedAction<A> get failedAction =>
       FutureFailedAction<A>(extras: extras);
+
+  @Deprecated('Use failedAction instead')
+  FutureFailedAction<A> get errorAction => failedAction;
 }
 
 /// An action class which is created by the Middleware for

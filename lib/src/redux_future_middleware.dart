@@ -14,7 +14,7 @@ import 'package:redux_future_middleware/src/actions.dart';
 ///
 /// - If the `Future` passed in `FutureAction` completes successfully, a
 /// `FutureSuccessAction` will be dipatched with the result of the `Future`.
-/// - If the `Future` passed in `FutureAction` fails, a `FutureErrorAction`
+/// - If the `Future` passed in `FutureAction` fails, a `FutureFailedAction`
 /// will be dispatched containing the error that was returned.
 /// - When the `FutureAction` is dipatches, a `FuturePendingAction` is
 /// dispatched from the `futureMiddleware` for consumption by the `Reducer`.
@@ -27,13 +27,13 @@ void futureMiddleware<State>(
   _dispatchFutureAction<State>(store, action);
 }
 
-_dispatchFutureAction<State>(Store<State> store, dynamic action) async {
+_dispatchFutureAction<State>(Store<State> store, FutureAction action) {
   Function(dynamic) dispatch = store.dispatch;
   dispatch(action.pendingAction);
 
   action.future
       .then((value) => dispatch(action.successAction..payload = value))
-      .catchError((error) => dispatch(action.errorAction..error = error));
+      .catchError((error) => dispatch(action.failedAction..error = error));
 }
 
 /// A utility function provided for checking if the action passed

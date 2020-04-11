@@ -1,4 +1,6 @@
-abstract class FutureState<State> {
-  State rebuildForError(dynamic action);
-  State rebuildForPending(dynamic action);
+import 'package:redux_future_middleware/src/actions.dart';
+
+abstract class FutureState<State extends FutureState<State>> {
+  State updateOnFailed(FutureFailedAction action);
+  State updateOnPending(FuturePendingAction action);
 }
