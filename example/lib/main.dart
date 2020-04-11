@@ -7,8 +7,7 @@ import 'package:redux_future_middleware/redux_future_middleware.dart';
 
 void main() {
   final store = Store<CounterState>(CounterReducer.reduce,
-      initialState: CounterState.initialState(),
-      middleware: [futureMiddleware]);
+      initialState: CounterState(), middleware: [futureMiddleware]);
   runApp(MyApp(
     store: store,
   ));

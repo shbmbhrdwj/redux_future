@@ -1,26 +1,16 @@
-import 'package:built_value/built_value.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
 
-abstract class FutureAppState implements FutureState {
-  @nullable
-  String get error;
-  int get loadingState;
-
-  FutureAppState rebuild(void Function(dynamic) updates);
+class FutureAppState implements FutureState<FutureAppState> {
+  String error;
+  int loadingState;
 
   @override
-  rebuildForError(action) {
-    return rebuild((builder) => builder
-      ..error = "Some Error"
-      ..loadingState = 1
-      ..build());
-  }
+  FutureAppState updateOnFailed(action) => this
+    ..error = "Some error occured"
+    ..loadingState = 1;
 
   @override
-  rebuildForPending(action) {
-    return rebuild((builder) => builder
-      ..error = null
-      ..loadingState = 2
-      ..build());
-  }
+  FutureAppState updateOnPending(action) => this
+    ..error = null
+    ..loadingState = 2;
 }
