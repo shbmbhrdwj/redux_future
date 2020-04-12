@@ -19,9 +19,9 @@ void main() {
     String futureReducer(String state, dynamic action) {
       if (action is FuturePendingAction<Action>) {
         return action.toString();
-      } else if (action is FutureSuccessAction<Action, String>) {
+      } else if (action is FutureSucceededAction<Action, String>) {
         return action.payload;
-      } else if (action is FutureErrorAction) {
+      } else if (action is FutureFailedAction) {
         return action.error.toString();
       } else {
         return state;
@@ -46,7 +46,7 @@ void main() {
       });
 
       test(
-          'dispatches a FutureSuccessAction if the future completes successfully',
+          'dispatches a FutureSuccededAction if the future completes successfully',
           () async {
         const String dispatchedAction = "Friend";
         final Future<String> future = Future<String>.value(dispatchedAction);
@@ -95,7 +95,7 @@ void main() {
       });
 
       test(
-          'Follows the FutureAction -> FuturePendingAction -> FutureSuccessAction logic',
+          'Follows the FutureAction -> FuturePendingAction -> FutureSuccededAction logic',
           () async {
         FutureAction<Action, String> action = FutureAction<Action, String>(
             future: Future<String>.value("Friend"));
@@ -105,7 +105,7 @@ void main() {
         expect(logs, <String>[
           action.toString(),
           FuturePendingAction<Action>().toString(),
-          (FutureSuccessAction<Action, String>()..payload = fulfilledAction)
+          (FutureSucceededAction<Action, String>()..payload = fulfilledAction)
               .toString(),
         ]);
       });
@@ -125,15 +125,15 @@ void main() {
                 future: Future<String>.value("Friend"));
         FuturePendingAction<Action> futurePendingAction =
             FuturePendingAction<Action>();
-        FutureSuccessAction<Action, String> futureSuccessAction =
-            FutureSuccessAction<Action, String>();
-        FutureErrorAction<String> futureErrorAction =
-            FutureErrorAction<String>();
+        FutureSucceededAction<Action, String> futureSuccededAction =
+            FutureSucceededAction<Action, String>();
+        FutureFailedAction<String> futureFailedAction =
+            FutureFailedAction<String>();
 
         expect(isActionOfFutureType(futureAction), true);
         expect(isActionOfFutureType(futurePendingAction), true);
-        expect(isActionOfFutureType(futureSuccessAction), true);
-        expect(isActionOfFutureType(futureErrorAction), true);
+        expect(isActionOfFutureType(futureSuccededAction), true);
+        expect(isActionOfFutureType(futureFailedAction), true);
       });
     });
   });
