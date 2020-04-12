@@ -8,7 +8,7 @@ class FutureReducerDefaults {
   static State Function<State, Action>(State, FuturePendingAction<Action>)
       pendingReducer = futurePendingReducer;
 
-  /// A field defining the default pending reducer to be used. It defaults
+  /// A field defining the default failed reducer to be used. It defaults
   /// to [FutureReducerDefaults.futureFailedReducer].
   static State Function<State, Action>(State, FutureFailedAction<Action>)
       failedReducer = futureFailedReducer;

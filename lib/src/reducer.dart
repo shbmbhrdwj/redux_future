@@ -32,13 +32,13 @@ class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
       successReducer;
 
   /// A reducer to handle [FutureFailedAction], when you need to use custom
-  /// implementation to handle the action. This will be used instead of the
-  /// [FutueReducerDefaults.failedReducer].
+  /// implementation to handle the action. If not null, this will be used
+  /// instead of [FutueReducerDefaults.failedReducer].
   final State Function(State, FutureFailedAction<Action>) failedReducer;
 
   /// A reducer to handle [FuturePendingAction], when you need to use custom
-  /// implementation to handle the action. This will be used instead of the
-  /// [FutureReducerDefaults.pendingReducer].
+  /// implementation to handle the action. If not null, this will be used
+  /// instead of [FutureReducerDefaults.pendingReducer].
   final State Function(State, FuturePendingAction<Action>) pendingReducer;
 
   /// Creates a [Reducer] which handles the `success`, `pending` and `failed`

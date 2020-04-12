@@ -11,7 +11,7 @@ Once attached, you can `store.dipatch` the `FutureAction`, and the `futureMiddle
 
 - If the `Future` passed in `FutureAction` completes successfully, a `FutureSucceededAction` will be dipatched with the result of the `Future`.
 - If the `Future` passed in `FutureAction` fails, a `FutureFailedAction` will be dispatched containing the error that was returned.
-- When the `FutureAction` dipatches, a `FuturePendingAction` is dispatched from the `futureMiddleware` for consumption by the `Reducer`.
+- When the `FutureAction` dispatches, a `FuturePendingAction` is dispatched from the `futureMiddleware` for consumption by the `Reducer`.
 
 # Usage:
 
@@ -30,14 +30,14 @@ main() {
     AppState exampleReducer(AppState prevState, dynamic action) {
         if (action is FuturePendingAction<ExampleAction>) {
             return prevState
-                        ..loadingValue = 'Fetching';
+                        ..loadingValue='Fetching';
         } else if (action is FutureSucceededAction<ExampleAction, String>) {
             return prevState
-                        ..value = action.payload
+                        ..value=action.payload
                         ..loadingValue='Done';
         } else if (action is FutureFailedAction<ExampleAction>) {
             return prevState
-                        ..loadingValue="Failed";
+                        ..loadingValue='Failed';
         }
 
         return prevState;

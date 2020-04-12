@@ -44,7 +44,7 @@ class FutureAction<A, P> {
 }
 
 /// An action class which is created by the Middleware for
-/// signalling that the current state of [Future] is uncompleted.
+/// signalling that the current state of [Future] is incomplete.
 class FuturePendingAction<A> {
   FuturePendingAction({this.extras});
 

@@ -127,13 +127,13 @@ void main() {
             FuturePendingAction<Action>();
         FutureSucceededAction<Action, String> futureSuccededAction =
             FutureSucceededAction<Action, String>();
-        FutureFailedAction<String> futureErrorAction =
+        FutureFailedAction<String> futureFailedAction =
             FutureFailedAction<String>();
 
         expect(isActionOfFutureType(futureAction), true);
         expect(isActionOfFutureType(futurePendingAction), true);
         expect(isActionOfFutureType(futureSuccededAction), true);
-        expect(isActionOfFutureType(futureErrorAction), true);
+        expect(isActionOfFutureType(futureFailedAction), true);
       });
     });
   });

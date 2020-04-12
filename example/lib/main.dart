@@ -89,7 +89,3 @@ class CounterViewModel {
     );
   }
 }
-
-S meraBachchaReducer<S, A>(S prevState, FuturePendingAction<A> action) {
-  return prevState;
-}

@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import '../mocks.dart';
 
 void main() {
-  group("When Future Reducers is given custom reducers", () {
+  group("When FutureReducer is given custom reducers", () {
     String pendingString = "Pending from custom";
     String errorString = "Something bad happened from custom";
 
