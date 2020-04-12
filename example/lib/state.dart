@@ -4,8 +4,8 @@ import 'package:example/future_app_state.dart';
 part 'state.g.dart';
 
 abstract class CounterState
-    with FutureAppState
-    implements Built<CounterState, CounterStateBuilder> {
+    with FutureAppStateRebuildMixin
+    implements FutureAppState, Built<CounterState, CounterStateBuilder> {
   factory CounterState([updates(CounterStateBuilder b)]) = _$CounterState;
   CounterState._();
 
@@ -16,5 +16,10 @@ abstract class CounterState
     return CounterState((CounterStateBuilder builder) => builder
       ..value = 0
       ..loadingState = 0);
+  }
+
+  @override
+  rebuildForPending(action) {
+    return super.rebuildForPending(action);
   }
 }

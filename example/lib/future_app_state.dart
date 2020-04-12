@@ -1,26 +1,29 @@
 import 'package:built_value/built_value.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
 
+part 'future_app_state.g.dart';
+
+@BuiltValue(instantiable: false)
 abstract class FutureAppState implements FutureState {
   @nullable
   String get error;
   int get loadingState;
+}
 
-  FutureAppState rebuild(void Function(dynamic) updates);
+abstract class FutureAppStateRebuildMixin {
+  FutureAppState rebuild(void Function(FutureAppStateBuilder) updates);
 
-  @override
+  FutureAppStateBuilder toBuilder();
+
   rebuildForError(action) {
     return rebuild((builder) => builder
       ..error = "Some Error"
-      ..loadingState = 1
-      ..build());
+      ..loadingState = 1);
   }
 
-  @override
   rebuildForPending(action) {
     return rebuild((builder) => builder
       ..error = null
-      ..loadingState = 2
-      ..build());
+      ..loadingState = 2);
   }
 }
