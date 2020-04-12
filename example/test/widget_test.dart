@@ -5,6 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:example/reducer.dart';
+import 'package:example/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -16,9 +18,9 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp(
-        store: Store<int>(
-      counterReducer,
-      initialState: 0,
+        store: Store<CounterState>(
+      CounterReducer.reduce,
+      initialState: CounterState(),
       middleware: [futureMiddleware],
     )));
 

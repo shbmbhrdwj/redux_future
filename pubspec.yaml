@@ -1,7 +1,7 @@
 name: redux_future_middleware
 description: >
   A Middleware for Redux which makes handling Dart Future easy by using Actions.
-version: 0.2.0
+version: 0.3.0
 author: Shubham Bhardwaj <shbmbhrdwj@gmail.com>
 homepage: https://github.com/shbmbhrdwj/redux_future
 repository: https://github.com/shbmbhrdwj/redux_future
@@ -17,3 +17,4 @@ dependencies:
 dev_dependencies:
   test: ^1.9.4
   test_coverage: ^0.4.0
+  pedantic: ^1.8.0+1
