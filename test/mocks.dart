@@ -2,7 +2,7 @@ import 'package:redux_future_middleware/src/actions.dart';
 import 'package:redux_future_middleware/src/state.dart';
 
 class MockState extends FutureState<MockState> {
-  String value;
+  String? value;
 
   @override
   MockState updateOnFailed(action) {

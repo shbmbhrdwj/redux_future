@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import '../mocks.dart';
 
 class BasicMockState {
-  String value;
+  String? value;
 }
 
 void main() {

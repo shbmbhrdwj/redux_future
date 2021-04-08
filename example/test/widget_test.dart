@@ -19,7 +19,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp(
         store: Store<CounterState>(
-      CounterReducer.reduce,
+      CounterReducer.reduce as CounterState Function(CounterState, dynamic),
       initialState: CounterState(),
       middleware: [futureMiddleware],
     )));
