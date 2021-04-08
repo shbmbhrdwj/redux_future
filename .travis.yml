@@ -6,6 +6,6 @@ dart:
 with_content_shell: false
 script:
   - pub get
-  - pub run test_coverage
+  - pub run test_cov
 after_success:
   - bash <(curl -s https://codecov.io/bash)

@@ -5,7 +5,7 @@ class Increment {}
 
 class CounterReducer {
   static Function reduce = FutureReducer<CounterState, Increment, int>(
-      successReducer: successReducer);
+      successReducer: successReducer) as Function;
 
   static CounterState successReducer(CounterState state, action) {
     return state..value = state.value + 1;

@@ -8,31 +8,38 @@ class Action {}
 
 void main() {
   group('Future Middleware', () {
-    Store<String> store;
-    List<String> logs;
+    late Store<String?> store;
+    late List<String> logs;
     void loggingMiddleware<State>(
         Store<State> store, dynamic action, NextDispatcher next) {
       logs.add(action.toString());
       next(action);
     }
 
-    String futureReducer(String state, dynamic action) {
+    String? futureReducer(String? state, dynamic action) {
       if (action is FuturePendingAction<Action>) {
         return action.toString();
-      } else if (action is FutureSucceededAction<Action, String>) {
+      }
+      if (action is FutureSucceededAction<Action, String>) {
         return action.payload;
-      } else if (action is FutureFailedAction) {
+      }
+      if (action is FutureFailedAction) {
         return action.error.toString();
-      } else {
+      }
+      {
         return state;
       }
     }
 
     setUp(() {
-      store = Store<String>(futureReducer, middleware: <Middleware<String>>[
-        loggingMiddleware,
-        futureMiddleware
-      ]);
+      store = Store<String?>(
+        futureReducer,
+        middleware: <Middleware<String?>>[
+          loggingMiddleware,
+          futureMiddleware,
+        ],
+        initialState: null,
+      );
       logs = <String>[];
     });
 
@@ -46,7 +53,7 @@ void main() {
       });
 
       test(
-          'dispatches a FutureSuccededAction if the future completes successfully',
+          'dispatches a FutureSucceededAction if the future completes successfully',
           () async {
         const String dispatchedAction = "Friend";
         final Future<String> future = Future<String>.value(dispatchedAction);
@@ -60,9 +67,9 @@ void main() {
 
       test('dispatches a FutureErrorAction if the future returns an error', () {
         final Exception exception = Exception("Error Message");
-        final Future<String> future = Future<String>.error(exception);
-        final FutureAction<Action, String> action =
-            FutureAction<Action, String>(future: future);
+        final Future<String?> future = Future<String?>.error(exception);
+        final FutureAction<Action, String?> action =
+            FutureAction<Action, String?>(future: future);
 
         store.dispatch(action);
         expect(
@@ -85,9 +92,9 @@ void main() {
       test('returns the error of the Future after it has been dispatched',
           () async {
         final Exception exception = Exception("Something bad happened");
-        final Future<String> future = Future<String>.error(exception);
-        final FutureAction<Action, String> action =
-            FutureAction<Action, String>(future: future);
+        final Future<String?> future = Future<String?>.error(exception);
+        final FutureAction<Action, String?> action =
+            FutureAction<Action, String?>(future: future);
 
         store.dispatch(action);
         expect(future.catchError((_) => store.state),
@@ -95,7 +102,7 @@ void main() {
       });
 
       test(
-          'Follows the FutureAction -> FuturePendingAction -> FutureSuccededAction logic',
+          'Follows the FutureAction -> FuturePendingAction -> FutureSucceededAction logic',
           () async {
         FutureAction<Action, String> action = FutureAction<Action, String>(
             future: Future<String>.value("Friend"));
@@ -125,14 +132,14 @@ void main() {
                 future: Future<String>.value("Friend"));
         FuturePendingAction<Action> futurePendingAction =
             FuturePendingAction<Action>();
-        FutureSucceededAction<Action, String> futureSuccededAction =
+        FutureSucceededAction<Action, String> futureSucceededAction =
             FutureSucceededAction<Action, String>();
         FutureFailedAction<String> futureFailedAction =
             FutureFailedAction<String>();
 
         expect(isActionOfFutureType(futureAction), true);
         expect(isActionOfFutureType(futurePendingAction), true);
-        expect(isActionOfFutureType(futureSuccededAction), true);
+        expect(isActionOfFutureType(futureSucceededAction), true);
         expect(isActionOfFutureType(futureFailedAction), true);
       });
     });
