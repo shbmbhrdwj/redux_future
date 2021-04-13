@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:redux/redux.dart';
-import 'package:test/test.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
+import 'package:test/test.dart';
 
 class Action {}
 
@@ -112,8 +112,7 @@ void main() {
         expect(logs, <String>[
           action.toString(),
           FuturePendingAction<Action>().toString(),
-          (FutureSucceededAction<Action, String>()..payload = fulfilledAction)
-              .toString(),
+          (FutureSucceededAction<Action, String>(fulfilledAction)).toString(),
         ]);
       });
     });
@@ -133,7 +132,7 @@ void main() {
         FuturePendingAction<Action> futurePendingAction =
             FuturePendingAction<Action>();
         FutureSucceededAction<Action, String> futureSucceededAction =
-            FutureSucceededAction<Action, String>();
+            FutureSucceededAction<Action, String>("");
         FutureFailedAction<String> futureFailedAction =
             FutureFailedAction<String>();
 
