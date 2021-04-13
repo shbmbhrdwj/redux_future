@@ -11,13 +11,16 @@
 /// [FuturePendingAction], [FutureSucceededAction] and [FutureFailedAction],
 /// which can be consumed by the [Reducer] defined by the user.
 class FutureAction<A, P> {
-  FutureAction({required this.future, this.extras});
+  FutureAction({
+    required this.future,
+    this.extras = const {},
+  });
 
   /// The [Future] passed to the action.
   Future<P> future;
 
   /// The extras which are passed along to the created actions.
-  Map<String, dynamic>? extras;
+  Map<String, dynamic> extras;
 
   /// This function can be used in debugging to identify the
   /// action dispatched, especially in case of multiple actions
@@ -44,10 +47,10 @@ class FutureAction<A, P> {
 /// An action class which is created by the Middleware for
 /// signalling that the current state of [Future] is incomplete.
 class FuturePendingAction<A> {
-  FuturePendingAction({this.extras});
+  FuturePendingAction({this.extras = const {}});
 
   /// A property containing the extras passed by [FutureAction].
-  Map<String, dynamic>? extras;
+  Map<String, dynamic> extras;
 
   /// This function can be used in debugging to identify the
   /// action dispatched, especially in case of multiple actions
@@ -61,10 +64,10 @@ class FuturePendingAction<A> {
 /// and is successful, this class contains the result of [Future]
 /// in [payload] property.
 class FutureSucceededAction<A, P> {
-  FutureSucceededAction(this.payload, {this.extras});
+  FutureSucceededAction(this.payload, {this.extras = const {}});
 
   /// A property containing the extras passed by [FutureAction].
-  Map<String, dynamic>? extras;
+  Map<String, dynamic> extras;
 
   /// Property containing the result of [Future] after successful
   /// completion.
@@ -82,10 +85,10 @@ class FutureSucceededAction<A, P> {
 /// and is unsuccessful, this class contains the error by [Future]
 /// in [error] property.
 class FutureFailedAction<A> {
-  FutureFailedAction({this.extras, this.error});
+  FutureFailedAction({this.extras = const {}, this.error});
 
   /// A property containing the extras passed by [FutureAction].
-  Map<String, dynamic>? extras;
+  Map<String, dynamic> extras;
 
   /// Property containing the error by [Future] after unsuccessful
   /// completion.
