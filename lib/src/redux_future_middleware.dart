@@ -32,8 +32,8 @@ _dispatchFutureAction<State>(Store<State> store, FutureAction action) {
   dispatch(action.pendingAction);
 
   action.future
-      .then((value) => dispatch(action.successAction..payload = value))
-      .catchError((error) => dispatch(action.failedAction..error = error));
+      .then((value) => dispatch(action.succeededWith(value)))
+      .catchError((error) => dispatch(action.failedWith(error)));
 }
 
 /// A utility function provided for checking if the action passed

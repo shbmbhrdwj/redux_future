@@ -1,3 +1,9 @@
+## [v0.4.0-nullsafety]
+
+- Add Initial support for null safety
+- Removed Deprecated FutureErrorAction and FutureSuccessAction
+- Fix typos
+
 ## [v0.3.0]
 
 - Add FutureReducer and FutureState

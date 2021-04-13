@@ -1,4 +1,3 @@
-
 /// A [Redux] action class primarily used for dispatching an
 /// action containing [Future].
 ///
@@ -33,13 +32,13 @@ class FutureAction<A, P> {
 
   /// The getter for generated [FutureSucceededAction] used by
   /// the Middleware.
-  FutureSucceededAction<A, P> get successAction =>
-      FutureSucceededAction<A, P>(extras: extras);
+  FutureSucceededAction<A, P> succeededWith(P payload) =>
+      FutureSucceededAction<A, P>(payload, extras: extras);
 
   /// The getter for generated [FutureFailedAction] used by
   /// the Middleware.
-  FutureFailedAction<A> get failedAction =>
-      FutureFailedAction<A>(extras: extras);
+  FutureFailedAction<A> failedWith(dynamic error) =>
+      FutureFailedAction<A>(error: error, extras: extras);
 }
 
 /// An action class which is created by the Middleware for
@@ -62,14 +61,14 @@ class FuturePendingAction<A> {
 /// and is successful, this class contains the result of [Future]
 /// in [payload] property.
 class FutureSucceededAction<A, P> {
-  FutureSucceededAction({this.extras});
+  FutureSucceededAction(this.payload, {this.extras});
 
   /// A property containing the extras passed by [FutureAction].
   Map<String, dynamic>? extras;
 
   /// Property containing the result of [Future] after successful
   /// completion.
-  P? payload;
+  P payload;
 
   /// This function can be used in debugging to identify the
   /// action dispatched, especially in case of multiple actions
@@ -83,7 +82,7 @@ class FutureSucceededAction<A, P> {
 /// and is unsuccessful, this class contains the error by [Future]
 /// in [error] property.
 class FutureFailedAction<A> {
-  FutureFailedAction({this.extras});
+  FutureFailedAction({this.extras, this.error});
 
   /// A property containing the extras passed by [FutureAction].
   Map<String, dynamic>? extras;
