@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
 import 'package:redux_future_middleware/src/actions.dart';
@@ -50,27 +49,27 @@ class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
   /// to [FutureReducerDefaults.pendingReducer] or [FutureReducerDefaults.failedReducer].
   ///
   factory FutureReducer({
-    @required
+    required
         State Function(State, FutureSucceededAction<Action, Payload>)
             successReducer,
-    State Function(State, FuturePendingAction<Action>) pendingReducer,
-    State Function(State, FutureFailedAction<Action>) failedReducer,
+    State Function(State, FuturePendingAction<Action>)? pendingReducer,
+    State Function(State, FutureFailedAction<Action>)? failedReducer,
   }) {
     return FutureReducer._(
       successReducer: successReducer,
       pendingReducer: pendingReducer ??
-          (State state, FuturePendingAction<Action> action) =>
-              FutureReducerDefaults.pendingReducer(state, action),
+          ((State state, FuturePendingAction<Action> action) =>
+              FutureReducerDefaults.pendingReducer(state, action)),
       failedReducer: failedReducer ??
-          (State state, FutureFailedAction<Action> action) =>
-              FutureReducerDefaults.failedReducer(state, action),
+          ((State state, FutureFailedAction<Action> action) =>
+              FutureReducerDefaults.failedReducer(state, action)),
     );
   }
 
   FutureReducer._({
-    @required this.successReducer,
-    @required this.pendingReducer,
-    @required this.failedReducer,
+    required this.successReducer,
+    required this.pendingReducer,
+    required this.failedReducer,
   });
 
   State call(State prevState, dynamic action) {

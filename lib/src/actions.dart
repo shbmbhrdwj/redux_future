@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 /// A [Redux] action class primarily used for dispatching an
 /// action containing [Future].
 ///
@@ -13,7 +11,10 @@ import 'package:meta/meta.dart';
 /// [FuturePendingAction], [FutureSucceededAction] and [FutureFailedAction],
 /// which can be consumed by the [Reducer] defined by the user.
 class FutureAction<A, P> {
-  FutureAction({@required this.future, this.extras});
+  FutureAction({
+    required this.future,
+    this.extras = const {},
+  });
 
   /// The [Future] passed to the action.
   Future<P> future;
@@ -34,19 +35,19 @@ class FutureAction<A, P> {
 
   /// The getter for generated [FutureSucceededAction] used by
   /// the Middleware.
-  FutureSucceededAction<A, P> get successAction =>
-      FutureSucceededAction<A, P>(extras: extras);
+  FutureSucceededAction<A, P> succeededWith(P payload) =>
+      FutureSucceededAction<A, P>(payload, extras: extras);
 
   /// The getter for generated [FutureFailedAction] used by
   /// the Middleware.
-  FutureFailedAction<A> get failedAction =>
-      FutureFailedAction<A>(extras: extras);
+  FutureFailedAction<A> failedWith(dynamic error) =>
+      FutureFailedAction<A>(error: error, extras: extras);
 }
 
 /// An action class which is created by the Middleware for
 /// signalling that the current state of [Future] is incomplete.
 class FuturePendingAction<A> {
-  FuturePendingAction({this.extras});
+  FuturePendingAction({this.extras = const {}});
 
   /// A property containing the extras passed by [FutureAction].
   Map<String, dynamic> extras;
@@ -63,7 +64,7 @@ class FuturePendingAction<A> {
 /// and is successful, this class contains the result of [Future]
 /// in [payload] property.
 class FutureSucceededAction<A, P> {
-  FutureSucceededAction({this.extras});
+  FutureSucceededAction(this.payload, {this.extras = const {}});
 
   /// A property containing the extras passed by [FutureAction].
   Map<String, dynamic> extras;
@@ -76,15 +77,7 @@ class FutureSucceededAction<A, P> {
   /// action dispatched, especially in case of multiple actions
   /// dispatched, if needed.
   @override
-  String toString() => "FutureSuccededAction[type = $A, payload = $payload]";
-}
-
-@Deprecated("Use FutureSuccededAction instead")
-class FutureSuccessAction<A, P> extends FutureSucceededAction<A, P> {
-  FutureSuccessAction({Map<String, dynamic> extras}) : super(extras: extras);
-
-  @override
-  String toString() => "FutureSuccessAction[type = $A, payload = $payload]";
+  String toString() => "FutureSucceededAction[type = $A, payload = $payload]";
 }
 
 /// An action class which is created by the Middleware for
@@ -92,7 +85,7 @@ class FutureSuccessAction<A, P> extends FutureSucceededAction<A, P> {
 /// and is unsuccessful, this class contains the error by [Future]
 /// in [error] property.
 class FutureFailedAction<A> {
-  FutureFailedAction({this.extras});
+  FutureFailedAction({this.extras = const {}, this.error});
 
   /// A property containing the extras passed by [FutureAction].
   Map<String, dynamic> extras;
@@ -106,12 +99,4 @@ class FutureFailedAction<A> {
   /// dispatched, if needed.
   @override
   String toString() => "FutureFailedAction[type = $A, error = $error]";
-}
-
-@Deprecated("Use FutureFailedAction instead")
-class FutureErrorAction<A> extends FutureFailedAction<A> {
-  FutureErrorAction({Map<String, dynamic> extras}) : super(extras: extras);
-
-  @override
-  String toString() => "FutureErrorAction[type = $A, error = $error]";
 }

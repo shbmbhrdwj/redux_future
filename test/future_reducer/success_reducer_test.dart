@@ -12,7 +12,7 @@ void main() {
     );
     final expectedValue = "Success";
     final FutureSucceededAction<MockAction, String> action =
-        FutureSucceededAction<MockAction, String>()..payload = expectedValue;
+        FutureSucceededAction<MockAction, String>(expectedValue);
 
     var newState = futureReducer(MockState(), action);
 

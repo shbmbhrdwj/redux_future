@@ -113,5 +113,5 @@ FutureReducer<AppState, ExampleAction, String> exampleReducer =
 
 # Credits:
 
-- [Brian Egan](http://github.com/brianegan), for the inspiration on developing it.
+- [Brian Egan](https://github.com/brianegan), for the inspiration on developing it.
 - [Ibrahim Mubarak Hussain](https://github.com/ibrahim-mubarak), for lending a helping hand.

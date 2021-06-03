@@ -6,7 +6,7 @@ import 'package:redux/redux.dart';
 import 'package:redux_future_middleware/redux_future_middleware.dart';
 
 void main() {
-  final store = Store<CounterState>(CounterReducer.reduce,
+  final store = Store<CounterState>(CounterReducer.reduce as CounterState Function(CounterState, dynamic),
       initialState: CounterState(), middleware: [futureMiddleware]);
   runApp(MyApp(
     store: store,
@@ -16,7 +16,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final Store<CounterState> store;
 
-  MyApp({@required this.store});
+  MyApp({required this.store});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final String title;
+  final String? title;
 
   MyHomePage({this.title});
 
@@ -45,7 +45,7 @@ class MyHomePage extends StatelessWidget {
         builder: (context, viewModel) {
           return Scaffold(
               appBar: AppBar(
-                title: Text(title),
+                title: Text(title!),
               ),
               body: Center(
                 child: Column(
@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                     Text(
                       '${viewModel.counterValue}',
-                      style: Theme.of(context).textTheme.display1,
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ],
                 ),
@@ -71,8 +71,8 @@ class MyHomePage extends StatelessWidget {
 }
 
 class CounterViewModel {
-  int counterValue;
-  VoidCallback callback;
+  int? counterValue;
+  VoidCallback? callback;
 
   CounterViewModel({this.counterValue, this.callback});
 
