@@ -49,9 +49,8 @@ class FutureReducer<State, Action, Payload> extends ReducerClass<State> {
   /// to [FutureReducerDefaults.pendingReducer] or [FutureReducerDefaults.failedReducer].
   ///
   factory FutureReducer({
-    required
-        State Function(State, FutureSucceededAction<Action, Payload>)
-            successReducer,
+    required State Function(State, FutureSucceededAction<Action, Payload>)
+        successReducer,
     State Function(State, FuturePendingAction<Action>)? pendingReducer,
     State Function(State, FutureFailedAction<Action>)? failedReducer,
   }) {

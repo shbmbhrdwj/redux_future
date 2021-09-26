@@ -28,6 +28,19 @@ class FutureAction<A, P> {
   @override
   String toString() => "FutureAction[type = $A, future = $future]";
 
+  /// This function is used to convert the action into FSA format
+  /// This is useful for interoperability between different redux modules
+  Map<String, dynamic> toJson() {
+    return {
+      "type": "FutureAction<$A, $P>",
+      "meta": {
+        "future_action_type": A.toString(),
+        "future_payload_type": P.toString(),
+        "extras": extras,
+      }
+    };
+  }
+
   /// The getter for generated [FuturePendingAction] used by
   /// the Middleware.
   FuturePendingAction<A> get pendingAction =>
@@ -57,6 +70,18 @@ class FuturePendingAction<A> {
   /// dispatched, if needed.
   @override
   String toString() => "FuturePendingAction[type = $A]";
+
+  /// This function is used to convert the action into FSA format
+  /// This is useful for interoperability between different redux modules
+  Map<String, dynamic> toJson() {
+    return {
+      "type": "FuturePendingAction<$A>",
+      "meta": {
+        "future_action_type": A.toString(),
+        "extras": extras,
+      }
+    };
+  }
 }
 
 /// An action class which is created by the Middleware for
@@ -78,6 +103,20 @@ class FutureSucceededAction<A, P> {
   /// dispatched, if needed.
   @override
   String toString() => "FutureSucceededAction[type = $A, payload = $payload]";
+
+  /// This function is used to convert the action into FSA format
+  /// This is useful for interoperability between different redux modules
+  Map<String, dynamic> toJson() {
+    return {
+      "type": "FutureSucceededAction<$A, $P>",
+      "payload": payload,
+      "meta": {
+        "future_action_type": A.toString(),
+        "future_payload_type": P.toString(),
+        "extras": extras,
+      }
+    };
+  }
 }
 
 /// An action class which is created by the Middleware for
@@ -99,4 +138,17 @@ class FutureFailedAction<A> {
   /// dispatched, if needed.
   @override
   String toString() => "FutureFailedAction[type = $A, error = $error]";
+
+  /// This function is used to convert the action into FSA format
+  /// This is useful for interoperability between different redux modules
+  Map<String, dynamic> toJson() {
+    return {
+      "type": "FutureFailedAction<$A>",
+      "error": error,
+      "meta": {
+        "future_action_type": A.toString(),
+        "extras": extras,
+      }
+    };
+  }
 }

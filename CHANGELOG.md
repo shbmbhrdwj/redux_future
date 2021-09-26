@@ -1,3 +1,7 @@
+## [v0.4.1]
+
+- Add `toJson` methods to actions which converts the actions to FSA style JSON, this is to allow interoperability between different redux packages.
+
 ## [v0.4.0-nullsafety]
 
 - Add Initial support for null safety
